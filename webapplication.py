@@ -27,7 +27,7 @@ class WebApplication:
 
     def load_config(self, config_file):
         if not BASE_DIR.joinpath(config_file).exists():
-            raise FileNotFoundError(f"Please select a config file that exists. Given file {config_file} does not exists!")
+            raise FileNotFoundError(f"Please select a config file that exists. The file {config_file} does not exists!")
         with open(BASE_DIR.joinpath(config_file)) as yfile:
             self._config = yaml.safe_load(yfile)
 
