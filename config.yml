@@ -8,18 +8,15 @@ base:
 pages:
   home:
     title: 'Welcome to wndlng.github.io!'
-    template: default.j2
-    type: single
+    type: default
   posts:
     title: 'Posts'
     pagination: 10
-    template: default.j2
-    type: articles
+    type: article
   projects:
     title: 'Projects'
     pagination: 10
-    template: default.j2
-    type: articles
+    type: article
 social_media:
   github: github.com/jwndlng
   gitlab:
