@@ -1,0 +1,26 @@
+---
+
+base:
+  author: Jan Wendling
+  contact: jan.wendling@gmail.com
+  timezone: 'Europe/Zurich'
+  content: raw
+pages:
+  home:
+    title: 'Welcome to wndlng.github.io!'
+    template: default.j2
+    type: single
+  posts:
+    title: 'Posts'
+    pagination: 10
+    template: default.j2
+    type: articles
+  projects:
+    title: 'Projects'
+    pagination: 10
+    template: default.j2
+    type: articles
+social_media:
+  github: github.com/jwndlng
+  gitlab:
+  linkedin:
