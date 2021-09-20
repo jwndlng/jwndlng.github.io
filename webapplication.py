@@ -81,7 +81,7 @@ class WebApplication:
             for page in self.pages:
                 node = {
                     'href': f"{page}.html",
-                    'name': page,
+                    'name': self.pages[page]['name'],
                     'is_active': False
                 }
                 if page == self.name:

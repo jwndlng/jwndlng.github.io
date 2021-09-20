@@ -8,13 +8,16 @@ base:
 pages:
   index:
     title: 'Welcome to wndlng.github.io!'
+    name: 'About'
     type: default
   posts:
     title: 'Posts'
+    name: 'My Posts'
     pagination: 10
     type: article
   projects:
     title: 'Projects'
+    name: 'My Projects'
     pagination: 10
     type: article
 templates:
