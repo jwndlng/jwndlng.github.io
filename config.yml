@@ -17,6 +17,10 @@ pages:
     title: 'Projects'
     pagination: 10
     type: article
+templates:
+  nav: nav
+  article: page_article
+  default: default
 social_media:
   github: github.com/jwndlng
   gitlab:
