@@ -1,17 +1,24 @@
-{% extends "base.j2" %}
+{%- extends "base.j2" -%}
 
-{% block title %}
-{% endblock %}
+{%- block title -%}{{title}}{%- endblock -%}
 
-{% block head %}
-{% endblock %}
+{%- block head -%}
+{%- endblock -%}
 
-{% block body %}
+{%- block body -%}
 
+{%- block header -%}
 {{print_navigation}}
-
-{# print_content #}
-
-{# print_footer #}
-
 {% endblock %}
+
+
+{%- block content -%}
+<h1>{{title}}</h1>
+{# print_content #}
+{%- endblock -%}
+
+{%- block footer -%}
+{# print_footer #}
+{%- endblock -%}
+
+{%- endblock -%}

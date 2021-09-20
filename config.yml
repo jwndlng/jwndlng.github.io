@@ -6,7 +6,7 @@ base:
   timezone: 'Europe/Zurich'
   content: raw
 pages:
-  home:
+  index:
     title: 'Welcome to wndlng.github.io!'
     type: default
   posts:

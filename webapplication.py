@@ -7,7 +7,7 @@ based on markdown and jinja2 template engine.
 import argparse
 import pathlib
 import yaml
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 
 
 # CONSTANTS
@@ -24,6 +24,13 @@ class WebApplication:
     def __init__(self, config_file):
         # Load configuration
         self.load_config(config_file)
+        # base params
+        self.params = {
+            'meta': {
+                'author': self._config['base']['author'],
+                'description': ''
+            }
+        }
         # Set paths
         self._raw_content = BASE_DIR.joinpath(
             self._config.get('base', {}).get('content', '')
@@ -43,17 +50,24 @@ class WebApplication:
         PTYPE_MAIN = 1
         PTYPE_CONTENT = 2
 
-        def __init__(self, name, pages, page_type=PTYPE_MAIN):
+        def __init__(self, name, pages, page_type=PTYPE_MAIN, params={}):
+            self.tpl_env = Environment(loader=FileSystemLoader(TPL_DIR))
             self.name = name
+            self.page = pages[name]
             self.pages = pages
             self.type = page_type
+            self.params = params
             self.content = []
 
         def add_content(self, content):
             self.content.append(content)
 
         def render(self):
-            nav_html = self.render_nav()
+            params = self.params
+            params['print_navigation'] = self.render_nav()
+            params['title'] = self.page['title']
+            tpl = self.tpl_env.get_template(DEF_TPL)
+            return tpl.render(**params)
 
         def render_overview(self):
             pass
@@ -74,23 +88,25 @@ class WebApplication:
                     node['is_active'] = True
                 nodes.append(node)
             # read template
-            with open(TPL_DIR.joinpath(NAV_TPL)) as tpl_file:
-                template = Template(tpl_file.read())
+            tpl = self.tpl_env.get_template(NAV_TPL)
             # render
-            html = template.render(nodes=nodes)
-            return html
+            return tpl.render(nodes=nodes)
+
 
     # Render
     def render(self):
         pages = self._config.get('pages', {})
         for page in pages:
-            self.render_page(page, pages)
+            self.create_page(
+                page,
+                self.render_page(page, pages)
+            )
 
             # Create folder for subpages
             if pages[page].get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
                 self.create_folder(page)
 
-            for subpage in self.get_content_pages(page):
+            for filepath in self.get_content_pages(page):
 
                 # TODO
                 # Two things are important here
@@ -98,16 +114,12 @@ class WebApplication:
                 # - Create subpage if its type article
 
                 if pages[page].get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
-                    self.render_subpage(page, pages, subpage)
+                    self.render_subpage(page, pages, filepath)
 
     def render_page(self, name, pages):
         # Render the entry page
-
-        page = self.Page(name, pages)
-        page.render()
-
-        # Render subpages - detaillink!
-        # self.get_content_pages(name)
+        page = self.Page(name, pages, params=self.params)
+        return page.render()
 
     def render_subpage(self, parent, pages, filepath):
         """
@@ -117,10 +129,11 @@ class WebApplication:
 
     # Helper
     def create_folder(self, name):
-        pass
+        BASE_DIR.joinpath(name).mkdir(exist_ok=True)
 
-    def create_page(self):
-        pass
+    def create_page(self, filepath, content):
+        with open(f'{filepath}.html', 'w', encoding='utf-8') as html_file:
+            html_file.write(content)
 
     def get_content_pages(self, name):
         subfolder = self._raw_content.joinpath(name)
@@ -128,16 +141,24 @@ class WebApplication:
         return files
 
 
-# Cleanup    
+# CLEANUP    
+def reset(config):
+    # TODO implement cleanup function
+    print("Remove pages and their folders!")
 
-# TODO implement cleanup function
 
 # MAIN
 def main():
     parser = argparse.ArgumentParser(description='Generating static webpage')
     parser.add_argument('-c', '--config', default='config.yml')
+    parser.add_argument('-r', '--reset', action='store_true')
     args = parser.parse_args()
-    # run application
+    
+    # Clean application
+    if args.reset:
+        reset(args.config)
+
+    # run application    
     app = WebApplication(args.config)
     status = app.render()
 

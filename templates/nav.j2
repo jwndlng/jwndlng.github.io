@@ -1,5 +1,4 @@
-<nav id="main-navigation">
-    <ul>
+<nav id="main-navigation"><ul>
         {%- for node in nodes: -%}
             {%- if node.is_active -%}
             <li><span>{{node.name}}</span></li>
@@ -7,5 +6,4 @@
             <li><a href="{{node.href}}">{{node.name}}</a></li>
             {%- endif -%}
         {%- endfor -%}
-    </ul>
-</nav>
+</ul></nav>
