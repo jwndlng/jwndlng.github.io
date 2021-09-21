@@ -1,0 +1,24 @@
+
+.button.is-black {
+    border: none;
+    background: none;
+    color: #333;
+}
+
+.button.is-black:hover {
+    border: none;
+    background: none;
+    color: #00d1b2;
+}
+
+.button.is-black-primary {
+    border: none;
+    background: none;
+    color: #333;
+}
+
+.button.is-black-primary:hover {
+    border: none;
+    background: none;
+    color: #fff;
+}

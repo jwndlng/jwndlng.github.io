@@ -9,7 +9,7 @@ pages:
   - file: index
     name: 'About'
     nav: [main]
-    title: 'Welcome to wndlng.github.io!'
+    title: 'Welcome to jwndlng.github.io!'
     type: default
   - file: posts
     name: 'My Posts'
@@ -34,6 +34,12 @@ templates:
   article: page_article
   default: default
 social_media:
-  github: github.com/jwndlng
+  github:
+    title: GitHub
+    href: https://github.com/jwndlng
   gitlab:
+    title: GitLab
+    href: https://gitlab.com/jwndlng
   linkedin:
+    title: LinkedIn
+    href: https://linked.com/jan-wendling

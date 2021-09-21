@@ -13,9 +13,12 @@ from jinja2 import Environment, FileSystemLoader
 # CONSTANTS
 BASE_DIR = pathlib.Path(__file__).parent
 TPL_DIR = BASE_DIR.joinpath('templates')
+
 # TODO change to config
 NAV_TPL = 'nav.j2'
 DEF_TPL = 'default.j2'
+SOCIAL_MEDIA_TPL = 'social_media.j2'
+SOCIAL_MEDIA_HEADER_TPL = 'social_media_header.j2'
 
 
 # APPLICATION
@@ -24,13 +27,6 @@ class WebApplication:
     def __init__(self, config_file):
         # Load configuration
         self.load_config(config_file)
-        # base params
-        self.params = {
-            'meta': {
-                'author': self._config['base']['author'],
-                'description': ''
-            }
-        }
         # variables
         self.pages = self._config.get('pages', [])
         # Set paths
@@ -54,18 +50,24 @@ class WebApplication:
         NAV_MAIN = 'main'
         NAV_FOOTER = 'footer'
 
-        def __init__(self, page, pages, page_type=PTYPE_MAIN, params={}):
+        def __init__(self, page, config, page_type=PTYPE_MAIN, params={}):
             self.tpl_env = Environment(loader=FileSystemLoader(TPL_DIR))
             self.page = page
-            self.pages = pages
+            self.pages = config.get('pages', [])
+            self.social_media = config.get('social_media', {})
             self.type = page_type
-            self.params = params
+            self.params = {
+                'meta': {
+                    'author': config['base']['author'],
+                    'description': ''
+                }
+            }
             self.content = []
 
         def add_content(self, content):
             self.content.append(content)
 
-        def render(self):
+        def get_params(self):
             params = self.params
             params['print_main_navigation'] = self.render_nav(
                 "main",
@@ -75,7 +77,16 @@ class WebApplication:
                 "foot",
                 [p for p in self.pages if self.NAV_FOOTER in p['nav']]
             )
+            params['print_social_media'] = self.render_social_media()
+            params['print_social_media_header'] = self.render_social_media(
+                tpl_file=SOCIAL_MEDIA_HEADER_TPL
+            )
             params['title'] = self.page['title']
+            params['print_content'] = 'dummy'
+            return params
+
+        def render(self):
+            params = self.get_params()
             tpl = self.tpl_env.get_template(DEF_TPL)
             return tpl.render(**params)
 
@@ -102,6 +113,13 @@ class WebApplication:
             # render
             return tpl.render(name=name, nodes=nodes)
 
+        def render_social_media(self, tpl_file=SOCIAL_MEDIA_TPL):
+            # read template
+            tpl = self.tpl_env.get_template(tpl_file)
+            # render
+            return tpl.render(social_media=self.social_media)
+
+
     # Render
     def render(self):
         for page in self.pages:
@@ -127,7 +145,7 @@ class WebApplication:
 
     def render_page(self, name, pages):
         # Render the entry page
-        page = self.Page(name, pages, params=self.params)
+        page = self.Page(name, self._config)
         return page.render()
 
     def render_subpage(self, parent, filepath):
