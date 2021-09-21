@@ -105,7 +105,7 @@ class WebApplication:
                     'name': page['name'],
                     'is_active': False
                 }
-                if page == self.page['name']:
+                if page['name'] == self.page['name']:
                     node['is_active'] = True
                 nodes.append(node)
             # read template
