@@ -31,6 +31,8 @@ class WebApplication:
                 'description': ''
             }
         }
+        # variables
+        self.pages = self._config.get('pages', [])
         # Set paths
         self._raw_content = BASE_DIR.joinpath(
             self._config.get('base', {}).get('content', '')
@@ -49,11 +51,12 @@ class WebApplication:
         CONTENT_TYPE_ARTICLE = 'article'
         PTYPE_MAIN = 1
         PTYPE_CONTENT = 2
+        NAV_MAIN = 'main'
+        NAV_FOOTER = 'footer'
 
-        def __init__(self, name, pages, page_type=PTYPE_MAIN, params={}):
+        def __init__(self, page, pages, page_type=PTYPE_MAIN, params={}):
             self.tpl_env = Environment(loader=FileSystemLoader(TPL_DIR))
-            self.name = name
-            self.page = pages[name]
+            self.page = page
             self.pages = pages
             self.type = page_type
             self.params = params
@@ -64,7 +67,14 @@ class WebApplication:
 
         def render(self):
             params = self.params
-            params['print_navigation'] = self.render_nav()
+            params['print_main_navigation'] = self.render_nav(
+                "main",
+                [p for p in self.pages if self.NAV_MAIN in p['nav']]
+            )
+            params['print_foot_navigation'] = self.render_nav(
+                "foot",
+                [p for p in self.pages if self.NAV_FOOTER in p['nav']]
+            )
             params['title'] = self.page['title']
             tpl = self.tpl_env.get_template(DEF_TPL)
             return tpl.render(**params)
@@ -75,53 +85,52 @@ class WebApplication:
         def render_detail(self):
             pass
 
-        def render_nav(self):
+        def render_nav(self, name, pages, tpl_file=NAV_TPL):
             # prepare data
             nodes = []
-            for page in self.pages:
+            for page in pages:
                 node = {
-                    'href': f"{page}.html",
-                    'name': self.pages[page]['name'],
+                    'href': f"{page['file']}.html",
+                    'name': page['name'],
                     'is_active': False
                 }
-                if page == self.name:
+                if page == self.page['name']:
                     node['is_active'] = True
                 nodes.append(node)
             # read template
-            tpl = self.tpl_env.get_template(NAV_TPL)
+            tpl = self.tpl_env.get_template(tpl_file)
             # render
-            return tpl.render(nodes=nodes)
-
+            return tpl.render(name=name, nodes=nodes)
 
     # Render
     def render(self):
-        pages = self._config.get('pages', {})
-        for page in pages:
+        for page in self.pages:
             self.create_page(
-                page,
-                self.render_page(page, pages)
+                page['file'],
+                self.render_page(page, self.pages)
             )
 
             # Create folder for subpages
-            if pages[page].get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
-                self.create_folder(page)
+            if page.get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
+                self.create_folder(page['file'])
 
-            for filepath in self.get_content_pages(page):
+            for filepath in self.get_content_pages(page['name']):
 
                 # TODO
                 # Two things are important here
                 # - Get content to be added on main page
                 # - Create subpage if its type article
 
-                if pages[page].get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
-                    self.render_subpage(page, pages, filepath)
+                if page.get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
+                    self.render_subpage(page, filepath)
+        return 0
 
     def render_page(self, name, pages):
         # Render the entry page
         page = self.Page(name, pages, params=self.params)
         return page.render()
 
-    def render_subpage(self, parent, pages, filepath):
+    def render_subpage(self, parent, filepath):
         """
         Renders a page defined in markdown
         """

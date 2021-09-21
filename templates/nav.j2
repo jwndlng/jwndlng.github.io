@@ -1,9 +1,9 @@
-<nav id="main-navigation"><ul>
-        {%- for node in nodes: -%}
-            {%- if node.is_active -%}
-            <li><span>{{node.name}}</span></li>
-            {%- else -%}
-            <li><a href="{{node.href}}">{{node.name}}</a></li>
-            {%- endif -%}
-        {%- endfor -%}
-</ul></nav>
+<div id="{{name}}Navigation" class="navbar-start">
+{%- for node in nodes: -%}
+    {%- if node.is_active -%}
+    <div class="navbar-item is-active">{{node.name}}</div>
+    {%- else -%}
+    <a class="navbar-item" href="{{node.href}}">{{node.name}}</a>
+    {%- endif -%}
+{%- endfor -%}
+</div>

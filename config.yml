@@ -6,20 +6,29 @@ base:
   timezone: 'Europe/Zurich'
   content: raw
 pages:
-  index:
-    title: 'Welcome to wndlng.github.io!'
+  - file: index
     name: 'About'
+    nav: [main]
+    title: 'Welcome to wndlng.github.io!'
     type: default
-  posts:
-    title: 'Posts'
+  - file: posts
     name: 'My Posts'
+    nav: [main]
     pagination: 10
+    title: 'Posts'
     type: article
-  projects:
-    title: 'Projects'
+  - file: projects   
     name: 'My Projects'
+    nav: [main]
     pagination: 10
+    title: 'Projects'
     type: article
+  - file: imprint
+    name: 'Imprint'
+    nav: [footer]
+    pagination: 10
+    title: 'Imprint'
+    type: default
 templates:
   nav: nav
   article: page_article
