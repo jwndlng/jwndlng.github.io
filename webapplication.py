@@ -5,6 +5,7 @@ based on markdown and jinja2 template engine.
 """
 
 import argparse
+import markdown
 import pathlib
 import yaml
 from jinja2 import Environment, FileSystemLoader
@@ -13,6 +14,7 @@ from jinja2 import Environment, FileSystemLoader
 # CONSTANTS
 BASE_DIR = pathlib.Path(__file__).parent
 TPL_DIR = BASE_DIR.joinpath('templates')
+CONTENT_SEPARATOR = '-----'
 
 # TODO change to config
 NAV_TPL = 'nav.j2'
@@ -64,11 +66,16 @@ class WebApplication:
             }
             self.content = []
 
-        def add_content(self, content):
-            self.content.append(content)
+        def add_content(self, title, meta, content):
+            self.content.append({
+                'title': title,
+                'meta': meta,
+                'content': content
+            })
 
         def get_params(self):
             params = self.params
+            params['print_content'] = self.render_content()
             params['print_main_navigation'] = self.render_nav(
                 "main",
                 [p for p in self.pages if self.NAV_MAIN in p['nav']]
@@ -82,7 +89,6 @@ class WebApplication:
                 tpl_file=SOCIAL_MEDIA_HEADER_TPL
             )
             params['title'] = self.page['title']
-            params['print_content'] = 'dummy'
             return params
 
         def render(self):
@@ -90,11 +96,26 @@ class WebApplication:
             tpl = self.tpl_env.get_template(DEF_TPL)
             return tpl.render(**params)
 
-        def render_overview(self):
-            pass
+        def render_content(self):
+            if self.page['type'] == self.CONTENT_TYPE_DEFAULT:
+                return self.render_overview()
+            elif self.page['type'] == self.CONTENT_TYPE_ARTICLE:
+                if self.type == self.PTYPE_MAIN:
+                    return self.render_article_overview()
+                else:
+                    return self.render_article()
 
-        def render_detail(self):
-            pass
+        def render_overview(self):
+            tpl = self.tpl_env.get_template('page_default.j2')
+            return tpl.render(content=self.content)
+
+        def render_article_overview(self):
+            tpl = self.tpl_env.get_template('page_article_overview.j2')
+            return tpl.render(content=self.content)
+
+        def render_article(self):
+            tpl = self.tpl_env.get_template('page_article_detail.j2')
+            return tpl.render(content=self.content)
 
         def render_nav(self, name, pages, tpl_file=NAV_TPL):
             # prepare data
@@ -123,36 +144,60 @@ class WebApplication:
     # Render
     def render(self):
         for page in self.pages:
-            self.create_page(
-                page['file'],
-                self.render_page(page, self.pages)
-            )
 
+            page_obj = self.Page(page, self._config)
+            
             # Create folder for subpages
             if page.get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
                 self.create_folder(page['file'])
 
-            for filepath in self.get_content_pages(page['name']):
+            for filepath in self.get_content_pages(page['file']):
 
                 # TODO
                 # Two things are important here
                 # - Get content to be added on main page
                 # - Create subpage if its type article
+                title, meta, preview, content = self.parse_markdown_file(filepath)
 
                 if page.get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
-                    self.render_subpage(page, filepath)
+                    #self.render_subpage(page, filepath)
+                    page_obj.add_content( title, meta, preview)
+                else:
+                    page_obj.add_content( title, meta, content)
+            
+            self.create_page(
+                page['file'],
+                page_obj.render()
+            )
+                    
         return 0
 
-    def render_page(self, name, pages):
-        # Render the entry page
-        page = self.Page(name, self._config)
-        return page.render()
 
-    def render_subpage(self, parent, filepath):
-        """
-        Renders a page defined in markdown
-        """
-        pass
+
+    def parse_markdown_file(self, filepath):
+        state = 0
+        title = ''
+        preview = ''
+        meta = {}
+        content = ''
+        with open(filepath, 'r', encoding='utf-8') as m_file:
+            for line in m_file.readlines():
+                if line.strip() == CONTENT_SEPARATOR:
+                    # States title -> meta data -> content
+                    state+=1
+                    continue             
+                if state == 0:
+                    title = line
+                elif state == 1:
+                    splits = line.split(':')
+                    meta[splits[0].strip()] = splits[1].strip()
+                elif state == 2:
+                    preview += line
+                elif state == 3:
+                    content += line
+                else:
+                    raise Exception(f"Reached unknown state {state}")
+        return title, meta, preview, markdown.markdown(content)
 
     # Helper
     def create_folder(self, name):

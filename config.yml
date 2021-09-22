@@ -23,11 +23,11 @@ pages:
     pagination: 10
     title: 'Projects'
     type: article
-  - file: imprint
-    name: 'Imprint'
+  - file: about-this-website
+    name: 'About this Website'
     nav: [footer]
     pagination: 10
-    title: 'Imprint'
+    title: 'About this Website'
     type: default
 templates:
   nav: nav

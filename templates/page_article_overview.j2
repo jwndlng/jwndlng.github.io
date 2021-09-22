@@ -1,0 +1,10 @@
+{% for data in content: %}
+<div>
+    <h3>{{data.title}}</h3>
+    Category: {{data.meta.category}}
+    <div class="">
+    {{data.content}}
+    </div>
+    {{data.meta.date}}
+</div>
+{% endfor %}
