@@ -1,4 +1,10 @@
+/* Main */
 
+div#main {
+    padding: 2em 0;
+}
+
+/* Custom buttons */
 .button.is-black {
     border: none;
     background: none;
@@ -21,4 +27,9 @@
     border: none;
     background: none;
     color: #fff;
+}
+
+#footNavigation div.is-active span.button {
+    background: none;
+    color: #00d1b2;
 }

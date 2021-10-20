@@ -161,10 +161,13 @@ class WebApplication:
 
                 if page.get('type', '') == self.Page.CONTENT_TYPE_ARTICLE:
                     #self.render_subpage(page, filepath)
-                    page_obj.add_content( title, meta, preview)
+                    page_obj.add_content(title, meta, preview)
                 else:
-                    page_obj.add_content( title, meta, content)
+                    page_obj.add_content(title, meta, content)
             
+            if len(page_obj.content) <= 0:
+                page_obj.add_content('', '', 'No content found')
+
             self.create_page(
                 page['file'],
                 page_obj.render()
@@ -190,7 +193,11 @@ class WebApplication:
                     title = line
                 elif state == 1:
                     splits = line.split(':')
-                    meta[splits[0].strip()] = splits[1].strip()
+                    name, value = self.parse_meta(
+                                    splits[0].strip(),
+                                    splits[1].strip()
+                                )
+                    meta[name] = value
                 elif state == 2:
                     preview += line
                 elif state == 3:
@@ -198,6 +205,11 @@ class WebApplication:
                 else:
                     raise Exception(f"Reached unknown state {state}")
         return title, meta, preview, markdown.markdown(content)
+
+    def parse_meta(self, name, value):
+        if name == 'tags':
+            value = value.split(',')
+        return name, value
 
     # Helper
     def create_folder(self, name):

@@ -1,10 +1,21 @@
 {% for data in content: %}
 <div>
     <h3>{{data.title}}</h3>
+    {% if data.meta.date %}
+    <span class="date">{{data.meta.date}}</span>
+    {% endif %}
+    {% if data.meta.category %}
     Category: {{data.meta.category}}
+    {% endif %}
     <div class="">
     {{data.content}}
     </div>
-    {{data.meta.date}}
+    {% if data.meta.tags %}
+    <div class="tags">
+        {% for tag in data.meta.tags %}
+        <span class="tag is-rounded is-dark">{{tag}}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endfor %}
