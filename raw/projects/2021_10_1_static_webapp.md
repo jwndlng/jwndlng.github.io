@@ -1,12 +1,9 @@
-jwndlng.github.io - Static web application generator
+jwndlng.github.io - Static website generator
 -----
-tags: development,python,web application
+tags: development,python,web application,css,html5
+more: https://github.com/jwndlng/jwndlng.github.io
 -----
-This website is a reference project for a simple python application that I wrote to generate static web application.<br/>
-The source code can be found <a href="https://github.com/jwndlng/jwndlng.github.io">here</a>
------
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.
+Static webapplication creator is small python project that generates a static website based on <a target="_blank" href="https://bulma.io">Bulma: the modern CSS framework</a> and <a target="_blank" href="https://jinja.palletsprojects.com/en/3.0.x/">Jinja Template Engine</a>.
 
-In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-
-Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, 
+This website was build with it and you can checkout the source code <a href="https://github.com/jwndlng/jwndlng.github.io">here</a>
+-----

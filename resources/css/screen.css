@@ -1,7 +1,42 @@
 /* Main */
 
+header {
+    padding: 1rem 1.5rem 1rem;
+}
+
 div#main {
-    padding: 2em 0;
+    padding: 1rem 1.5rem 3rem;
+}
+
+/* Base */
+
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+    background-color: #fff;
+    color: #2d9187;
+}
+
+header .navbar-brand {
+    margin-right:2em;
+}
+
+header .navbar-brand a.navbar-item {
+    background-image: url("../images/logo.png");
+    background-size: 100px 56px;
+    /* 605 345 -> 202 115*/
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 56px;
+    text-indent: -999em;
+}
+
+.content a {
+    color: #000000;
+    background-color: #00d1b2;
+    padding: 0 0.25em;
+}
+
+.content a:hover {
+    background-color: #fff;
 }
 
 /* Custom buttons */
@@ -33,3 +68,6 @@ div#main {
     background: none;
     color: #00d1b2;
 }
+
+/* article */
+
