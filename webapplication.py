@@ -6,6 +6,7 @@ based on markdown and jinja2 template engine.
 
 import argparse
 from jweb import WebApplication
+from settings import BASE_DIR
 
 # MAIN
 def main():
@@ -19,7 +20,7 @@ def main():
         pass
 
     # run application    
-    app = WebApplication(args.config)
+    app = WebApplication(BASE_DIR, args.config)
     status = app.render()
 
     if status == 0:
