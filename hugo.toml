@@ -31,12 +31,6 @@ paginate = 5
     url = "https://www.linkedin.com/in/jan-wendling/"
 
 [[menu.main]]
-  identifier = "index"
-  name = "Hello"
-  url = "/"
-  weight = 10
-
-[[menu.main]]
   identifier = "posts"
   name = "Blog"
   url = "/posts/"
