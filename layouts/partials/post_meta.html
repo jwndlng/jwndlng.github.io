@@ -18,12 +18,10 @@
 {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
 {{- end -}}
 
-{{- $colors := slice "tag-c1" "tag-c2" "tag-c3" "tag-c4" "tag-c5" }}
 {{- with .GetTerms "tags" }}
 <span class="post-tags">
   {{- range . }}
-  {{- $colorClass := index $colors (mod (strings.RuneCount .LinkTitle) (len $colors)) }}
-  <a href="{{ .Permalink }}" class="post-tag {{ $colorClass }}">{{ .LinkTitle }}</a>
+  <a href="{{ .Permalink }}">{{ .LinkTitle }}</a>
   {{- end }}
 </span>
 {{- end }}
