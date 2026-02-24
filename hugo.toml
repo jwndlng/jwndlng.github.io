@@ -18,7 +18,7 @@ paginate = 5
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
   ShowRssButtonInSectionTermList = true
-  homeInfoParams = { Title = "Wndlng's Blog", Content = "Writing about software engineering and security." }
+  homeInfoParams = { Title = "Wndlng's Blog" }
   [params.author]
     name = "Jan Wendling"
   [[params.socialIcons]]
@@ -29,16 +29,17 @@ paginate = 5
     url = "https://www.linkedin.com/in/jan-wendling/"
 
 [[menu.main]]
-  identifier = "posts"
-  name = "Posts"
-  url = "/posts/"
+  identifier = "index"
+  name = "Hello"
+  url = "/"
   weight = 10
 
+
 [[menu.main]]
-  identifier = "about"
-  name = "About"
-  url = "/about/"
-  weight = 20
+  identifier = "posts"
+  name = "Blog"
+  url = "/posts/"
+  weight = 10
 
 [[menu.main]]
   identifier = "search"
