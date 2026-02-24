@@ -1,2 +1,4 @@
-/.quarto/
-**/*.quarto_ipynb
+/public/
+/resources/
+.hugo_build.lock
+.claude/

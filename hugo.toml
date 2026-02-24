@@ -1,0 +1,53 @@
+baseURL = "https://blog.wndlng.ch"
+title = "Wndlng's Blog"
+theme = "PaperMod"
+languageCode = "en-us"
+paginate = 5
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+[params]
+  defaultTheme = "light"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  homeInfoParams = { Title = "Wndlng's Blog", Content = "Writing about software engineering and security." }
+  [params.author]
+    name = "Jan Wendling"
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://www.github.com/jwndlng"
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/jan-wendling/"
+
+[[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 30
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    guessSyntax = true
+    style = "nord"
