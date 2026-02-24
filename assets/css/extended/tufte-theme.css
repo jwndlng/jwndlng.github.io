@@ -57,7 +57,7 @@ body {
     display: block;
     padding: 0 10px;
     color: var(--secondary);
-    font-size: 10px;
+    font-size: 12px;
     line-height: 20px;
     background: var(--code-bg);
     border-radius: 3px;
