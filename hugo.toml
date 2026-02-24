@@ -13,7 +13,7 @@ paginate = 5
 [params]
   defaultTheme = "light"
   ShowReadingTime = true
-  ShowShareButtons = true
+  ShowShareButtons = false
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
