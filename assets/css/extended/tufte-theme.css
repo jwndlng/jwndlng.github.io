@@ -39,3 +39,7 @@
 body {
     font-family: "et-book", Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
+
+.entry-content p + p {
+    margin-top: 1rem;
+}
