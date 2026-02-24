@@ -4,6 +4,9 @@ date: "2026-02-24"
 description: "The first post on Wndlng's Blog."
 categories:
   - "general"
+tags:
+  - "security"
+  - "meta"
 ---
 
 Welcome to my blog.
