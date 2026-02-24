@@ -13,9 +13,15 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/jan-wendling/
 format:
-  tufte-html:
+  html:
+    theme: none
     highlight-style: arrow
-    css: styles.css
+    css:
+      - https://cdn.jsdelivr.net/gh/edwardtufte/tufte-css@gh-pages/tufte.css
+      - styles.css
+    include-in-header:
+      text: |
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 
 
