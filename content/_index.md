@@ -2,7 +2,7 @@
 title = "Wndlng's Blog"
 +++
 
-Hi, I'm Jan!
+Hi, I'm Jan 👋!
 
 
 I am a Senior Security Engineer based in Zurich, currently focused on securing the decentralized web at the **DFINITY Foundation**.
