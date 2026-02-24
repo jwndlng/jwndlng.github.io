@@ -31,11 +31,6 @@
       {{- end }}
     </h3>
   </header>
-  {{- if (ne ($page.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p>
-  </div>
-  {{- end }}
   {{- if not ($page.Param "hideMeta") }}
   <footer class="entry-footer">
     {{- partial "post_meta.html" $page -}}
