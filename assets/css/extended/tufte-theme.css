@@ -1,0 +1,28 @@
+/* Force tufte.css light palette regardless of PaperMod theme toggle */
+body,
+[data-theme="dark"] body,
+[data-theme="light"] body {
+  background-color: #fffff8 !important;
+  color: #111 !important;
+}
+
+/* Keep PaperMod layout control */
+body {
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Navbar and header should also stay light */
+[data-theme="dark"] .nav,
+[data-theme="dark"] #top-link,
+[data-theme="dark"] .header {
+  background-color: #fffff8 !important;
+  color: #111 !important;
+}
+
+/* tufte.css adds margin-top to li:not(:first-child), misaligning nav items */
+#menu li {
+  margin-top: 0 !important;
+}
