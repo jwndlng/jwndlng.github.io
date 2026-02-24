@@ -9,14 +9,12 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://www.github.com/jwndlng
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jan-wendling/
 format:
-  html:
-    theme:
-      - cosmo
-      - brand
+  tufte-html:
+    highlight-style: arrow
     css: styles.css
 
 
