@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  description: "A blog built with Quarto"
+  site-url: https://blog.wndlng.ch
+  title: "jwndlng.github.io"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+
+
+
