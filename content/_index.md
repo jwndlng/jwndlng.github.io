@@ -1,5 +1,5 @@
 +++
-title = "Wndlng's Blog"
+title = "Hello!"
 +++
 
 Hi, I'm Jan 👋!

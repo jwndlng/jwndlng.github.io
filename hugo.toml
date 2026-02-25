@@ -1,5 +1,5 @@
 baseURL = "https://blog.wndlng.ch"
-title = "Wndlng's Blog"
+title = "wndlng"
 theme = "PaperMod"
 languageCode = "en-us"
 paginate = 5
@@ -15,11 +15,11 @@ paginate = 5
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true
-  ShowBreadCrumbs = true
+  ShowBreadCrumbs = false
   ShowCodeCopyButtons = true
   ShowRssButtonInSectionTermList = true
   [params.homeInfoParams]
-    Title = "Wndlng's Blog"
+    Title = "Hello!"
   [params.author]
     name = "Jan Wendling"
   [[params.socialIcons]]
