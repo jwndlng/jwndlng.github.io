@@ -2,20 +2,14 @@
 title = "Projects"
 +++
 
-## Benny Watchman
+{{< project-card title="Benny Watchman" url="https://github.com/jwndlng/benny-watchman" icon="watchman" >}}
+An open-source tool for monitoring Benny.
+{{< /project-card >}}
 
-An open-source project for monitoring Benny.
-
-[View the repository](https://github.com/jwndlng/benny-watchman)
-
-## Spec Control
-
+{{< project-card title="Spec Control" url="https://github.com/jwndlng/spec-control" icon="spec-control" >}}
 A tool for managing specification-driven project workflows.
+{{< /project-card >}}
 
-[View the repository](https://github.com/jwndlng/spec-control)
-
-## cert-manager Plesk webhook
-
+{{< project-card title="cert-manager Plesk webhook" url="https://github.com/jwndlng/cert-manager-plesk-webhook" icon="cert-manager" >}}
 A Plesk DNS webhook for cert-manager, enabling DNS-based certificate validation.
-
-[View the repository](https://github.com/jwndlng/cert-manager-plesk-webhook)
+{{< /project-card >}}

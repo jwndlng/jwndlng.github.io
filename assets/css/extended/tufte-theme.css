@@ -67,3 +67,49 @@ body {
 .post-tags a:hover {
     color: var(--primary);
 }
+
+/* Project cards reuse PaperMod's post-entry surface and color variables. */
+.project-card.post-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.project-card-icon {
+    display: grid;
+    flex: 0 0 3.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    place-items: center;
+    color: var(--secondary);
+    background: var(--code-bg);
+    border-radius: var(--radius);
+}
+
+.project-card-icon svg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.project-card-body {
+    min-width: 0;
+}
+
+.project-card .entry-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.project-card .entry-content {
+    margin: 0.5rem 0;
+    color: var(--secondary);
+}
+
+.project-card .entry-footer a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+.project-card .entry-footer a:hover {
+    color: var(--primary);
+}
