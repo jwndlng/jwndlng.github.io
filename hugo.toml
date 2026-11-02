@@ -1,4 +1,4 @@
-baseURL = "https://blog.wndlng.ch"
+baseURL = "https://wndlng.ch"
 title = "wndlng"
 theme = "PaperMod"
 languageCode = "en-us"
