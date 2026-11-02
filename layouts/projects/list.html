@@ -1,0 +1,17 @@
+{{- define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+</header>
+
+{{- range .Pages.ByWeight }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h3 class="entry-hint-parent">{{ .Title }}</h3>
+  </header>
+  <div class="entry-content">{{ .Summary }}</div>
+  <footer class="entry-footer">
+    <a href="{{ .Params.repository }}" target="_blank" rel="noopener noreferrer">View repository</a>
+  </footer>
+</article>
+{{- end }}
+{{- end }}
