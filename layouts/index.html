@@ -31,6 +31,9 @@
       {{- end }}
     </h3>
   </header>
+  {{- if not ($page.Param "hideSummary") }}
+  <div class="entry-content"><p>{{ $page.Description | default ($page.Summary | plainify) }}</p></div>
+  {{- end }}
   {{- if not ($page.Param "hideMeta") }}
   <footer class="entry-footer">
     {{- partial "post_meta.html" $page -}}
@@ -51,6 +54,23 @@
     {{- end }}
   </nav>
 </footer>
+{{- end }}
+
+{{- if eq $paginator.PageNumber 1 }}
+{{- with site.GetPage "/projects" }}
+<section class="home-projects" aria-labelledby="projects-heading">
+  <div class="section-heading">
+    <h2 id="projects-heading">Projects</h2>
+    <a href="{{ .RelPermalink }}">View all →</a>
+  </div>
+  {{- range .Pages.ByWeight }}
+  <a class="project-line" href="{{ .Params.repository }}" target="_blank" rel="noopener noreferrer">
+    <span class="project-title">{{ .Title }} ↗</span>
+    <span class="project-description">{{ .Description | default (.Summary | plainify) }}</span>
+  </a>
+  {{- end }}
+</section>
+{{- end }}
 {{- end }}
 
 {{- end }}
