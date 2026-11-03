@@ -79,6 +79,9 @@
       {{- end }}
     </h3>
   </header>
+  {{- if not (.Param "hideSummary") }}
+  <div class="entry-content"><p>{{ .Description | default (.Summary | plainify) }}</p></div>
+  {{- end }}
   {{- if not (.Param "hideMeta") }}
   <footer class="entry-footer">
     {{- partial "post_meta.html" . -}}
