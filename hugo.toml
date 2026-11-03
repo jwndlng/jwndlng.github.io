@@ -11,6 +11,7 @@ paginate = 5
   term = ["HTML"]
 
 [params]
+  mainSections = ["posts"]
   defaultTheme = "light"
   ShowReadingTime = true
   ShowShareButtons = false
