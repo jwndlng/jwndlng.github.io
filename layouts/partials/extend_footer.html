@@ -1,0 +1,2 @@
+{{- $links := resources.Get "js/link-reveal.js" | minify | fingerprint -}}
+<script defer src="{{ $links.RelPermalink }}" integrity="{{ $links.Data.Integrity }}"></script>

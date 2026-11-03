@@ -36,10 +36,11 @@ body {
 .logo a { font-size: 24px; font-weight: 500; letter-spacing: -.7px; }
 .main { padding-top: 14px; }
 .home-info { min-height: 0; margin: 0 0 40px; }
-.home-info .entry-header h1 { font-size: 32px; letter-spacing: -.6px; }
+.home-info .entry-header h1 { font-size: 32px; font-weight: 500; letter-spacing: -.6px; }
 .home-info .entry-content { color: var(--content); font-size: 16px; line-height: 1.75; margin: 18px 0 0; }
 .home-info .entry-content p + p { margin-top: 18px; }
-.posts-heading { font-size: 24px; margin-bottom: 14px; }
+.posts-heading { font-size: 24px; font-weight: 500; margin-bottom: 14px; }
+.page-header h1, .post-title { font-weight: 500; }
 .entry-header h2, .entry-header h3 { font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 500; line-height: 1.35; letter-spacing: -.25px; }
 .post-entry { padding: 17px 20px; margin-bottom: 12px; }
 .post-entry:active { transform: none; }
@@ -48,28 +49,42 @@ body {
 .entry-footer .post-tags { position: relative; z-index: 1; }
 .home-projects { margin-top: 38px; }
 .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 8px; }
-.section-heading h2 { font-size: 24px; }
+.section-heading h2 { font-size: 24px; font-weight: 500; }
 .section-heading > a { color: var(--secondary); font: 11px Arial, Helvetica, sans-serif; }
 .project-line { display: flex; flex-direction: column; padding: 11px 0; border-bottom: 1px solid var(--border); }
 .project-title { align-self: flex-start; }
 .project-description { color: var(--secondary); font-size: 13px; line-height: 1.7; }
 
-/* Backgrounds follow inline text across line breaks without shifting layout. */
-a:not(.entry-link):not(.project-line), .project-title, .entry-header h3 {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-repeat: no-repeat;
-    background-size: 0% 1px;
-    background-position: left calc(100% + 3px);
-    transition: background-size 550ms cubic-bezier(.22,.61,.36,1), background-position 550ms cubic-bezier(.22,.61,.36,1);
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+/* Match the approved preview: a line grows from the text's left edge. */
+.link-label, .project-title, .post-entry .entry-header h3 {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+    transition: transform 480ms ease;
 }
-a:not(.entry-link):hover, a:not(.entry-link):focus-visible,
-.project-line:hover .project-title, .project-line:focus-visible .project-title,
-.post-entry:has(.entry-link:hover) .entry-header h3,
-.post-entry:has(.entry-link:focus-visible) .entry-header h3 {
-    background-size: 100% 1px;
-    background-position: left 100%;
+.link-label::after, .project-title::after, .post-entry .entry-header h3::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    opacity: 0;
+    transform: translateY(3px) scaleX(0);
+    transform-origin: left center;
+    transition: transform 550ms cubic-bezier(.22,.61,.36,1), opacity 420ms ease;
+    pointer-events: none;
+}
+a:hover > .link-label, a:focus-visible > .link-label,
+.project-line:hover .project-title, .project-line:focus-visible .project-title {
+    transform: translateY(-1px);
+}
+a:hover > .link-label::after, a:focus-visible > .link-label::after,
+.project-line:hover .project-title::after, .project-line:focus-visible .project-title::after,
+.post-entry:has(.entry-link:hover) .entry-header h3::after,
+.post-entry:has(.entry-link:focus-visible) .entry-header h3::after {
+    opacity: .65;
+    transform: translateY(0) scaleX(1);
 }
 .post-content a, .footer a { box-shadow: none; }
 .entry-header h3 { width: fit-content; }
@@ -87,6 +102,10 @@ button#theme-toggle:hover { transform: rotate(-10deg); }
     #menu a { min-height: 44px; line-height: 44px; }
 }
 @media (prefers-reduced-motion: reduce) {
-    a, .project-title, .entry-header h3, button#theme-toggle { transition: none !important; }
+    .link-label, .project-title, .entry-header h3,
+    .link-label::after, .project-title::after, .entry-header h3::after,
+    button#theme-toggle { transition: none !important; }
+    a:hover > .link-label, a:focus-visible > .link-label,
+    .project-line:hover .project-title, .project-line:focus-visible .project-title,
     button#theme-toggle:hover { transform: none; }
 }
