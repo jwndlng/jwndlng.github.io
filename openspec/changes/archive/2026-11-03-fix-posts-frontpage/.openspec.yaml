@@ -2,3 +2,4 @@ schema: spec-driven
 created: 2026-11-02
 spec-control:
   branch: feat/fix-posts-frontpage
+  archive-branch: feat/fix-posts-frontpage
