@@ -56,7 +56,10 @@ h1, h2, h3, h4, h5, h6, .logo a {
 .section-heading h2 { font-size: 24px; font-weight: 500; }
 .section-heading > a { color: var(--secondary); font: 11px Arial, Helvetica, sans-serif; }
 .project-line { display: flex; flex-direction: column; padding: 11px 0; border-bottom: 1px solid var(--border); }
-.project-title { align-self: flex-start; }
+.project-title {
+    align-self: flex-start;
+    font-family: Georgia, "Times New Roman", serif;
+}
 .project-description { color: var(--secondary); font-size: 13px; line-height: 1.7; }
 
 /* Match the approved preview: a line grows from the text's left edge. */
