@@ -5,6 +5,9 @@
 }
 
 body {
+    position: relative;
+    isolation: isolate;
+    min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     font-size: 16px;
     line-height: 1.75;
@@ -14,8 +17,21 @@ h1, h2, h3, h4, h5, h6, .logo a {
     font-family: Georgia, "Times New Roman", serif;
 }
 
-.list { background: #f8f8f7; }
-[data-theme="dark"] .list { background: var(--theme); }
+.list { background: transparent; }
+
+/* Theme-aware tile grid, faded toward the top without affecting page content. */
+body::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(0deg, color-mix(in srgb, var(--primary) 4%, transparent) 0 1px, transparent 1px 48px),
+        repeating-linear-gradient(90deg, color-mix(in srgb, var(--primary) 4%, transparent) 0 1px, transparent 1px 48px);
+    pointer-events: none;
+    mask-image: linear-gradient(to top, #000 0%, transparent 72%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 72%);
+}
 
 .nav {
     max-width: calc(var(--main-width) + var(--gap) * 2);
